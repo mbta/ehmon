@@ -86,9 +86,9 @@ do_report(RState) ->
         {M, F} = ehmon_app:config(report_mf, {ehmon, stdout_report}),
         erlang:apply(M, F, [ehmon:report(RState)])
     catch
-        Class:Err ->
+        Class:Err:Stacktrace ->
             ?ERR("class=~p err=~p stack=\"~p\"",
-                 [Class, Err, erlang:get_stacktrace()])
+                 [Class, Err, Stacktrace])
     end.
 
 
